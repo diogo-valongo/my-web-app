@@ -630,15 +630,10 @@ components:
           type: string
           description: Sigla do evento
           example: "NEV"
-        caminho:
-          type: string
-          description: Caminho do evento
-          example: "/caminho-do-evento"
       required:
         - nome
         - descricao
         - sigla
-        - caminho
 
     Edicao:
       type: object
@@ -647,10 +642,28 @@ components:
           type: integer
           description: ID da edição
           example: 1
+        numero:
+          type: integer
+          description: Numero da edicao
+          example: 34
         ano:
           type: integer
           description: Ano da edição
           example: 2023
+        cidade:
+          type: string
+          description: Nome da cidade
+          example: "Niterói"
+        dataInicial:
+          type: string
+          format: Date
+          description: Data inicial do evento
+          example: "2024-08-22"
+        dataFinal:
+          type: string
+          format: Date
+          description: Data final do evento
+          example: "2024-08-29"
         eventoId:
           type: integer
           description: ID do evento associado
