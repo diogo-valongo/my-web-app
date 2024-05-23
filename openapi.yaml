@@ -666,12 +666,12 @@ components:
           type: integer
           description: ID do organizador
           example: 1
-        nome:
-          type: string
-          description: Nome do organizador
-          example: "Nome do Organizador"
+        idUsuario:
+          type: integer
+          description: ID do usuario que será organizador
+          example: 1
       required:
-        - nome
+        - idUsuario
 
     Espaco:
       type: object
@@ -684,13 +684,26 @@ components:
           type: string
           description: Nome do espaço
           example: "Auditório Principal"
+        localizacao:
+          type: string
+          description: localização do espaço
+          example: "Local A"
         capacidade:
           type: integer
           description: Capacidade do espaço
           example: 100
+        recursos:
+          type: array
+          items:
+            type: string
+            example: "projetor"
+          description: recursos do espaço
+          example: ["projetor", "televisão"]
       required:
         - nome
         - capacidade
+        - localizacao
+        - recursos
 
     Atividade:
       type: object
@@ -706,11 +719,11 @@ components:
         tipoEnum:
           type: string
           enum:
-            - Atividade 1
-            - Atividade 2
-            - Atividade 3
+            - Palestra
+            - Painel
+            - Sessão técnica
           description: Tipo de atividade (Enum)
-          example: "Atividade 1"
+          example: "Palestra"
         descricao:
           type: string
           description: Descrição da atividade
@@ -734,12 +747,17 @@ components:
           type: integer
           description: ID da edição associada
           example: 1
+        localId:
+          type: integer
+          description: ID da local da atividade
+          example: 1
       required:
         - nome
         - tipoEnum
         - descricao
         - data
         - edicaoId
+        - localId
         - horarioInicio
         - horarioFinal
 
