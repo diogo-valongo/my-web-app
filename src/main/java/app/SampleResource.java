@@ -1,4 +1,4 @@
-package com.mycompany.app;
+package app;
 
 import javax.inject.Inject;
 import javax.ws.rs.GET;

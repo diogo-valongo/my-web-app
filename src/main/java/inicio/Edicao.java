@@ -1,4 +1,4 @@
-package com.mycompany.app.model;
+package inicio;
 import java.time.LocalDate;
 
 public class Edicao {

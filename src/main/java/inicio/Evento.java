@@ -1,4 +1,4 @@
-package com.mycompany.app.model;
+package inicio;
 
 public class Evento {
     protected long id;

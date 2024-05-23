@@ -1,4 +1,4 @@
-package com.mycompany.app.model;
+package inicio;
 
 public class Espaco {
     protected long id;
