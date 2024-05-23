@@ -48,7 +48,7 @@ paths:
       summary: Lista todos os usuários referentes a um evento
       tags:
         - Usuários
-            parameters:
+      parameters:
         - name: id
           in: path
           required: true
