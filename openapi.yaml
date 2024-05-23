@@ -43,6 +43,28 @@ paths:
               schema:
                 $ref: '#/components/schemas/Evento'
 
+  /eventos/{id}/users:
+     get:
+      summary: Lista todos os usuários referentes a um evento
+      tags:
+        - Usuários
+            parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+          description: ID do evento
+      responses:
+        '200':
+          description: Lista de usuários retornada com sucesso
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Usuario'
+
   /eventos/{id}:
     get:
       summary: Obtém um evento específico pelo ID
