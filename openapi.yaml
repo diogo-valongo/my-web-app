@@ -703,18 +703,45 @@ components:
           type: string
           description: Nome da atividade
           example: "Palestra de Abertura"
+        tipoEnum:
+          type: string
+          enum:
+            - Atividade 1
+            - Atividade 2
+            - Atividade 3
+          description: Tipo de atividade (Enum)
+          example: "Atividade 1"
         descricao:
           type: string
           description: Descrição da atividade
           example: "Palestra de abertura do evento"
+        data:
+          type: string
+          format: Date
+          description: Data do evento
+          example: "1999-12-30"
+        horarioInicio:
+          type: string
+          format: Date/Time
+          description: Horario de inicio do evento
+          example: "1999-12-30 01:00:00"
+        horarioFinal:
+          type: string
+          format: Date/Time
+          description: Horario de termino do evento
+          example: "1999-12-30 12:00:00"
         edicaoId:
           type: integer
           description: ID da edição associada
           example: 1
       required:
         - nome
+        - tipoEnum
         - descricao
+        - data
         - edicaoId
+        - horarioInicio
+        - horarioFinal
 
     Usuario:
       type: object
@@ -723,6 +750,10 @@ components:
           type: integer
           description: ID do usuário
           example: 1
+        login:
+          type: string
+          description: login do usuário
+          example: "login_do_usuario"
         nome:
           type: string
           description: Nome do usuário
@@ -731,6 +762,12 @@ components:
           type: string
           description: Email do usuário
           example: "usuario@example.com"
+        afiliacao:
+          type: string
+          description: Nome da afiliação
+          example: "Nome do Afiliacao"
       required:
         - nome
+        - login
+        - afiliacao
         - email
