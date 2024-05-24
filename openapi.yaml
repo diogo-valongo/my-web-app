@@ -664,12 +664,21 @@ components:
           format: Date
           description: Data final do evento
           example: "2024-08-29"
+        organizadorId:
+          type: integer
+          description: ID do organizador associado
+          example: 1
         eventoId:
           type: integer
           description: ID do evento associado
           example: 1
       required:
         - ano
+        - numero
+        - cidade
+        - dataInicial
+        - dataFinal
+        - organizadorId
         - eventoId
 
     Organizador:
