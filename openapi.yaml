@@ -43,7 +43,7 @@ paths:
               schema:
                 $ref: '#/components/schemas/Evento'
 
-  /eventos/{id}/users:
+  /eventos/{id}/usuarios:
      get:
       summary: Lista todos os usuários referentes a um evento
       tags:
@@ -129,9 +129,9 @@ paths:
         '404':
           description: Evento não encontrado
 
-  /edicoes:
+  /eventos/edicoes:
     get:
-      summary: Lista todas as edições
+      summary: Lista todas as edições de um evento
       tags:
         - Edições
       responses:
@@ -144,7 +144,7 @@ paths:
                 items:
                   $ref: '#/components/schemas/Edicao'
     post:
-      summary: Cria uma nova edição
+      summary: Cria uma nova edição de um evento
       tags:
         - Edições
       requestBody:
@@ -161,7 +161,7 @@ paths:
               schema:
                 $ref: '#/components/schemas/Edicao'
 
-  /edicoes/{id}:
+  /eventos/edicoes/{id}:
     get:
       summary: Obtém uma edição específica pelo ID
       tags:
@@ -225,22 +225,9 @@ paths:
         '404':
           description: Edição não encontrada
 
-  /organizadores:
-    get:
-      summary: Lista todos os organizadores
-      tags:
-        - Organizadores
-      responses:
-        '200':
-          description: Lista de organizadores retornada com sucesso
-          content:
-            application/json:
-              schema:
-                type: array
-                items:
-                  $ref: '#/components/schemas/Organizador'
+  /eventos/edicoes/usuarios:
     post:
-      summary: Cria um novo organizador
+      summary: Transforma um usuario em organizador
       tags:
         - Organizadores
       requestBody:
@@ -256,6 +243,22 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/Organizador'
+
+  /organizadores:
+    get:
+      summary: Lista todos os organizadores
+      tags:
+        - Organizadores
+      responses:
+        '200':
+          description: Lista de organizadores retornada com sucesso
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Organizador'
+
 
   /organizadores/{id}:
     get:
@@ -321,7 +324,7 @@ paths:
         '404':
           description: Organizador não encontrado
 
-  /espacos:
+  /eventos/edicoes/espacos:
     get:
       summary: Lista todos os espaços
       tags:
@@ -353,7 +356,7 @@ paths:
               schema:
                 $ref: '#/components/schemas/Espaco'
 
-  /espacos/{id}:
+  /eventos/espacos/{id}:
     get:
       summary: Obtém um espaço específico pelo ID
       tags:
@@ -416,10 +419,10 @@ paths:
           description: Espaço deletado com sucesso
         '404':
           description: Espaço não encontrado
-
-  /atividades:
+          
+  /eventos/edicoes/atividades:
     get:
-      summary: Lista todas as atividades
+      summary: Lista todas as atividades da edicao de um evento
       tags:
         - Atividades
       responses:
@@ -449,7 +452,7 @@ paths:
               schema:
                 $ref: '#/components/schemas/Atividade'
 
-  /atividades/{id}:
+  /eventos/atividades/{id}:
     get:
       summary: Obtém uma atividade específica pelo ID
       tags:
