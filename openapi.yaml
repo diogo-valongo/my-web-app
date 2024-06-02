@@ -673,6 +673,8 @@ components:
           example: >-
             O Evento Semana de TI UFF aceitará artigos academicos produzidos no
             ultimo ano que tenham relação com ti
+        incricao:
+          $ref: '#/components/schemas/Inscricao'
         organizadorId:
           type: integer
           description: ID do organizador associado
@@ -818,3 +820,25 @@ components:
         - login
         - afiliacao
         - email
+    Inscricao:
+      type: object
+      properties:
+        id:
+          type: integer
+          description: ID da inscricao
+          example: 1
+        preco:
+          type: integer
+          description: preço da incrição
+          example: 25
+        link:
+          type: string
+          description: link utilizado para fazer a inscrição no evento
+          example: www.incricao.com.br
+        info:
+          type: string
+          description: texto informativo sobre a insccrição
+          example: >-
+            A incrição permite aproveitar todos os locais do evento e garente o
+            acesso ao evento todos os dias além de manter um ingreso virtual em
+            sua carteira digital de preferencia
