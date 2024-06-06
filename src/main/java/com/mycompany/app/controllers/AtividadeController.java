@@ -104,4 +104,18 @@ public ResponseEntity<Void> associateEspaco(@PathVariable Integer atividadeId, @
 
     return ResponseEntity.noContent().build();
 }
+@DeleteMapping("/{atividadeId}/espaco/{espacoId}")
+public ResponseEntity<Void> disassociateEspaco(@PathVariable Integer atividadeId, @PathVariable Integer espacoId) {
+    Atividade atividade = atividadeService.getAtividadeById(atividadeId);
+    Espaco espaco = espacoService.getEspacoById(espacoId);
+
+    if (atividade == null || espaco == null) {
+        return ResponseEntity.notFound().build();
+    }
+
+    atividade.setLocal(null);
+    atividadeService.saveAtividade(atividade);
+
+    return ResponseEntity.noContent().build();
+}
 }

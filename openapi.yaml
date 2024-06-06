@@ -735,6 +735,26 @@ paths:
       responses:
         '200':
           description: OK
+    delete:
+      tags:
+        - atividade-controller
+      operationId: associateEspaco
+      parameters:
+        - name: atividadeId
+          in: path
+          required: true
+          schema:
+            type: integer
+            format: int32
+        - name: espacoId
+          in: path
+          required: true
+          schema:
+            type: integer
+            format: int32
+      responses:
+        '200':
+          description: OK
 components:
   schemas:
     Atividade:
