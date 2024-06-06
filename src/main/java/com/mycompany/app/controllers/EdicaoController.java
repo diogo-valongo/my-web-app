@@ -10,17 +10,24 @@ import com.mycompany.app.services.UsuarioService;
 import org.springframework.http.HttpStatus;
 
 import java.util.List;
+import com.mycompany.app.services.EventoService;
+import com.mycompany.app.models.Evento;
+
 
 @RestController
 @RequestMapping("/edicoes")
 public class EdicaoController {
 
-    @Autowired
-    private EdicaoService edicaoService;
+    private final EdicaoService edicaoService;
+    private final UsuarioService usuarioService;
+    private final EventoService eventoService;
 
-    @Autowired
-    private UsuarioService usuarioService;
-
+    public EdicaoController(EdicaoService edicaoService, UsuarioService usuarioService, EventoService eventoService) {
+        this.edicaoService = edicaoService;
+        this.usuarioService = usuarioService;
+        this.eventoService = eventoService;
+    }
+    
     @GetMapping
     public List<Edicao> getAllEdicoes() {
         return edicaoService.getAllEdicoes();
@@ -36,11 +43,13 @@ public class EdicaoController {
     }
 
     @PostMapping
-    public ResponseEntity<Edicao> createEdicao(@RequestBody Edicao edicao, @RequestParam Integer usuarioId) {
+    public ResponseEntity<Edicao> createEdicao(@RequestBody Edicao edicao, @RequestParam Integer usuarioId, @RequestParam Integer eventoId) {
         Usuario usuario = usuarioService.getUsuarioById(usuarioId);
-        if (usuario == null || !usuarioService.isAdmin(usuario)) {
+        Evento evento = eventoService.getEventoById(eventoId);
+        if (usuario == null || (!usuarioService.isAdmin(usuario)) || evento == null) {
             return ResponseEntity.status(HttpStatus.FORBIDDEN).build();
         }
+        edicao.setEvento(evento);
         return ResponseEntity.ok(edicaoService.saveEdicao(edicao));
     }
 
@@ -61,7 +70,7 @@ public class EdicaoController {
         edicao.setDataDivulgacao(edicaoDetails.getDataDivulgacao());
         edicao.setDataEntregaFinal(edicaoDetails.getDataEntregaFinal());
         edicao.setChamadaTrabalhos(edicaoDetails.getChamadaTrabalhos());
-        edicao.setInfo_Incricao(edicaoDetails.getInfo_Incricao());
+        edicao.setInfo_Inscricao(edicaoDetails.getInfo_Inscricao());
         edicao.setPrecosPorLote(edicaoDetails.getPrecosPorLote());
         edicao.setLink_Inscricao(edicaoDetails.getLink_Inscricao());
 

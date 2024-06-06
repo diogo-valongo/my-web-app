@@ -10,7 +10,10 @@ import java.util.List;
 import com.mycompany.app.models.Usuario;
 import com.mycompany.app.services.UsuarioService;
 import com.mycompany.app.models.Edicao;
+import com.mycompany.app.models.Espaco;
 import com.mycompany.app.services.EdicaoService;
+import com.mycompany.app.services.EspacoService;
+import com.mycompany.app.models.enums.TipoAtividade;
 
 @RestController
 @RequestMapping("/atividades")
@@ -24,6 +27,9 @@ public class AtividadeController {
 
     @Autowired
     private EdicaoService edicaoService;
+
+    @Autowired
+    private EspacoService espacoService;
 
     @GetMapping
     public List<Atividade> getAllAtividades() {
@@ -83,4 +89,19 @@ public class AtividadeController {
         atividadeService.deleteAtividade(id);
         return ResponseEntity.noContent().build();
     }
+
+    @PostMapping("/{atividadeId}/espaco/{espacoId}")
+public ResponseEntity<Void> associateEspaco(@PathVariable Integer atividadeId, @PathVariable Integer espacoId) {
+    Atividade atividade = atividadeService.getAtividadeById(atividadeId);
+    Espaco espaco = espacoService.getEspacoById(espacoId);
+
+    if (atividade == null || espaco == null) {
+        return ResponseEntity.notFound().build();
+    }
+
+    atividade.setLocal(espaco);
+    atividadeService.saveAtividade(atividade);
+
+    return ResponseEntity.noContent().build();
+}
 }

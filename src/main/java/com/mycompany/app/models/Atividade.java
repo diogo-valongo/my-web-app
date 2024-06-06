@@ -2,11 +2,15 @@ package com.mycompany.app.models;
 
 import javax.persistence.*;
 
+import org.springframework.lang.Nullable;
+
 import com.mycompany.app.models.enums.TipoAtividade;
 import lombok.Getter;
 import lombok.Setter;
 
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 import java.util.Set;
 
 @Getter
@@ -40,12 +44,13 @@ public class Atividade {
     @Column(nullable = false)
     private Date horarioFinal;
 
-    @ManyToOne
+    @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "edicao_id", nullable = false)
     private Edicao edicao;
 
-    @ManyToOne
-    @JoinColumn(name = "local_id", nullable = false)
+    @Nullable
+    @ManyToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "local_id")
     private Espaco local;
 
     @ManyToMany
@@ -53,7 +58,7 @@ public class Atividade {
         name = "usuario_atividade",
         joinColumns = @JoinColumn(name = "atividade_id"),
         inverseJoinColumns = @JoinColumn(name = "usuario_id"))
-    private Set<Usuario> usuarios;
+    private List<Usuario> usuarios = new ArrayList<>();
 
     
 

@@ -3,11 +3,11 @@ package com.mycompany.app.models;
 import javax.persistence.*;
 
 import com.mycompany.app.models.enums.TipoUsuario;
+import java.util.ArrayList;
 
 import java.util.List;
 import lombok.Getter;
 import lombok.Setter;
-import java.util.Set;
 
 @Getter
 @Setter
@@ -37,12 +37,11 @@ public class Usuario {
     @ManyToMany(mappedBy = "usuarios")
     private List<Edicao> edicoes;
 
-    
     @ManyToMany(mappedBy = "organizadores")
     private List<Edicao> organizacoes;
 
-    @ManyToMany(mappedBy = "usuarios")
-    private Set<Atividade> atividadesFavoritas;
+    @ManyToMany(mappedBy = "usuarios", cascade = CascadeType.ALL)
+    private List<Atividade> atividadesFavoritas = new ArrayList<>();
 
     // Getters e Setters
 }

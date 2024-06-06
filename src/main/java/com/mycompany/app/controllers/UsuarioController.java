@@ -103,23 +103,26 @@ public class UsuarioController {
         List<Atividade> atividades = new ArrayList<>(usuario.getAtividadesFavoritas());
         return ResponseEntity.ok(atividades);
     }
-
-    @PostMapping("/{id}/atividades")
-    public ResponseEntity<Void> addAtividadeToUsuario(@PathVariable Integer id, @RequestParam Integer atividadeId) {
+    
+    @PostMapping("/{id}/atividades/{atividadeId}")
+    public ResponseEntity<Void> addAtividadeToUsuario(@PathVariable Integer id, @PathVariable Integer atividadeId) {
         Usuario usuario = usuarioService.getUsuarioById(id);
         Atividade atividade = atividadeService.getAtividadeById(atividadeId);
 
         if (usuario == null || atividade == null || !usuarioService.isParticipante(usuario, atividade.getEdicao())) {
             return ResponseEntity.notFound().build();
         }
-
+        
+        //List<Atividade> atividades = new ArrayList<>(usuario.getAtividadesFavoritas());
+        //atividades.add(atividade);
+        //usuario.setAtividadesFavoritas(atividades);
         usuario.getAtividadesFavoritas().add(atividade);
         usuarioService.saveUsuario(usuario);
         return ResponseEntity.ok().build();
     }
 
-    @DeleteMapping("/{id}/atividades")
-    public ResponseEntity<Void> DeleteAtividadeToUsuario(@PathVariable Integer id, @RequestParam Integer atividadeId) {
+    @DeleteMapping("/{id}/atividades/{atividadeId}")
+    public ResponseEntity<Void> DeleteAtividadeToUsuario(@PathVariable Integer id, @PathVariable Integer atividadeId) {
         Usuario usuario = usuarioService.getUsuarioById(id);
         Atividade atividade = atividadeService.getAtividadeById(atividadeId);
 

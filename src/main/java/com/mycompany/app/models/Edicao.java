@@ -1,6 +1,11 @@
 package com.mycompany.app.models;
 
 import javax.persistence.*;
+
+import com.fasterxml.jackson.annotation.JsonIdentityInfo;
+import com.fasterxml.jackson.annotation.ObjectIdGenerators;
+
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import lombok.Getter;
@@ -9,6 +14,7 @@ import lombok.Setter;
 @Getter
 @Setter
 @Entity
+@JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "id")
 public class Edicao {
 
     @Id
@@ -25,7 +31,7 @@ public class Edicao {
     private String cidade;
     
     @Column(nullable = false)
-    private String info_Incricao;
+    private String info_Inscricao;
 
     @Column(nullable = false)
     private String precosPorLote;
@@ -53,29 +59,28 @@ public class Edicao {
     @Column(columnDefinition = "TEXT")
     private String chamadaTrabalhos;
 
-//VERIFICAR RELAÇÃO
     @ManyToMany
     @JoinTable(
-        name = "edicao_organizadores",
-        joinColumns = @JoinColumn(name = "edicao_id"),
-        inverseJoinColumns = @JoinColumn(name = "usuario_id")
-    )
-    private List<Usuario> organizadores;
+    name = "edicao_organizadores",
+    joinColumns = @JoinColumn(name = "edicao_id"),
+    inverseJoinColumns = @JoinColumn(name = "usuario_id")
+)
+private List<Usuario> organizadores = new ArrayList<>();
 
-    @ManyToOne
-    @JoinColumn(name = "evento_id", nullable = false)
-    private Evento evento;
+@ManyToOne(cascade = CascadeType.ALL)
+@JoinColumn(name = "evento_id", nullable = false)
+private Evento evento;
 
-    @OneToMany(mappedBy = "edicao", cascade = CascadeType.ALL)
-    private List<Atividade> atividades;
+@OneToMany(mappedBy = "edicao", cascade = CascadeType.ALL)
+private List<Atividade> atividades = new ArrayList<>();
 
-    @ManyToMany
-    @JoinTable(
-        name = "edicao_usuario",
-        joinColumns = @JoinColumn(name = "edicao_id"),
-        inverseJoinColumns = @JoinColumn(name = "usuario_id")
-    )
-    private List<Usuario> usuarios;
+@ManyToMany
+@JoinTable(
+    name = "edicao_usuario",
+    joinColumns = @JoinColumn(name = "edicao_id"),
+    inverseJoinColumns = @JoinColumn(name = "usuario_id")
+)
+private List<Usuario> usuarios = new ArrayList<>();
 
     // Getters e Setters
 }
